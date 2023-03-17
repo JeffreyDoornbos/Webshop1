@@ -1,0 +1,50 @@
+﻿@page
+@model Webshop.Pages.BestelModel
+@{
+    ViewData["Title"] = "Bestellen";
+}
+
+<head>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </environment>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="display-4 mb-5">Maccoebooks.nl</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Het volgende product is geselecteerd om te bestellen:</h3>
+                <p>@Model.artikelNaam</p>
+                <p>Prijs: @Model.artikelPrijs</p>
+                <img class="img-fluid" src="~/Images/@Model.artikelAfbeelding" alt="@Model.artikelNaam" />
+            </div>
+            <div class="col-md-8">
+                <h3>Vul hieronder je gegevens in</h3>
+                <form asp-action="Bestel" method="post">
+                    <div asp-validation-summary="All" class="alert alert-danger"></div>
+                    <div class="form-group">
+                        <label for="naam">Naam:</label>
+                        <input type="text" class="form-control" id="naam" name="naam" asp-for="naam" required />
+                        <span asp-validation-for="naam" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="adres">Adres:</label>
+                        <input type="text" class="form-control" id="adres" name="adres" asp-for="adres" required />
+                        <span asp-validation-for="adres" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="woonplaats">Woonplaats:</label>
+                        <input type="text" class="form-control" id="woonplaats" name="woonplaats" asp-for="woonplaats" required />
+                        <span asp-validation-for="woonplaats" class="text-danger"></span>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Bestel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,52 @@
+﻿@page
+@model Webshop.Pages.BeheerModel
+@{
+    ViewData["Title"] = "Beheer Page";
+}
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
+<div class="container">
+    <h1 class="display-4">Beheer</h1>
+    <style>
+        i {
+            width: 50px;
+            font-size: 30px;
+            color: red;
+        }
+    </style>
+
+    <a class="btn btn-primary mb-3" href="/insert">Voeg product toe</a>
+    <a class="btn btn-primary mb-3" href="/UserManagement">User management</a> <br />
+    <a asp-page-handler="Logout" class="btn btn-danger">Logout</a>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th hidden>Artikelnummer</th>
+                <th>Naam</th>
+                <th>Prijs</th>
+                <th>Afbeelding</th>
+                @*<th hidden>Bestel</th>*@
+                <th>Beheer</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (string[] shirt in Model.shirts)
+            {
+                <tr>
+                    <td hidden>@shirt[0]</td>
+                    <td>@shirt[1]</td>
+                    <td>€@shirt[2]</td>
+                    <td><img style="width: 200px;" src='Images\@shirt[3]' /></td>
+                    <td hidden><a class="btn btn-primary" href="/Bestel?artikelnummer=@shirt[0]">Bestel</a></td>
+                    <td>
+                        <a href="/Update?artikelnummer=@shirt[0]"><i class="fas fa-edit"></i></a>
+                        <a href="/Delete?artikelnummer=@shirt[0]"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+

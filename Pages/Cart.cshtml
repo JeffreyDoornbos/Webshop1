@@ -1,0 +1,40 @@
+﻿@page
+@model Webshop.Pages.CartModel
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h2>Shopping Cart</h2>
+
+@if (Model.CartItems.Count == 0)
+{
+    <p>Your shopping cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>€@item.Price.ToString("F2")</td>
+                    <td>@item.Quantity</td>
+                    <td>€@(item.Price * item.Quantity).ToString("F2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-right">
+        <h4>Total: €@Model.CartItems.Sum(x => x.Price * x.Quantity).ToString("F2")</h4>
+    </div>
+}

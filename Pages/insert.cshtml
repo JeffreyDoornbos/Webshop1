@@ -1,0 +1,23 @@
+﻿@page
+@model Webshop.Pages.insertModel
+@{
+    ViewData["Title"] = "Product toevoegen";
+}
+
+<h1>Insert Product</h1>
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="Naam">Naam:</label>
+        <input type="text" class="form-control" id="Naam" name="Naam">
+    </div>
+    <div class="form-group">
+        <label for="Prijs">Prijs:</label>
+        <input type="number" class="form-control" id="Prijs" name="Prijs">
+    </div>
+    <div class="form-group">
+        <label for="Afbeelding">Afbeelding:</label>
+        <input type="file" class="form-control-file" id="Afbeelding" name="Afbeelding">
+    </div>
+    <button type="submit" class="btn btn-success">Voeg product toe</button>
+    <a href="/Beheer" class="btn btn-primary">Back</a>
+</form>
