@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{F360A048-B052-4CB8-9AFB-F96ED7DA1524}|http">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Webshop/Pages/Bestel.cshtml.cs">
+    <Files>
+      <File FileName="Webshop/Pages/Bestel.cshtml.cs" Line="12" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Webshop" expanded="True">
+            <Node name="Webshop" expanded="True">
+              <Node name="Pages" expanded="True">
+                <Node name="Bestel.cshtml" expanded="True">
+                  <Node name="Bestel.cshtml.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="wwwroot" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Webshop PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

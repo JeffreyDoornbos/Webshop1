@@ -1,0 +1,69 @@
+﻿@page
+@model Webshop.Pages.KlantenSysteemModel
+@{
+}
+
+<style>
+    .container {
+        margin-top: 50px;
+    }
+
+    .table {
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+        .table thead th {
+            font-weight: 500;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .table tbody td {
+            vertical-align: middle;
+        }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #dcdcdc;
+    }
+
+    .table-hover tbody tr:hover td {
+        background-color: #f5f5f5;
+    }
+</style>
+
+<div class="container">
+    <h1 class="display-4">Klanten</h1>
+    <table class="table table-hover table-bordered mt-4">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Naam</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adres/Postcode</th>
+                <th scope="col">Plaats</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var klant in Model.Klanten)
+            {
+                <tr>
+                    <td>@klant.ID</td>
+                    <td>@klant.Naam</td>
+                    <td>@klant.Email</td>
+                    <td>@klant.Postcode</td>
+                    <td>@klant.Plaats</td>
+                    <td>
+                        <a href="/KlantBetsellingen?KlantID=@klant.ID" class="btn btn-primary btn-sm mr-2"><i class="fas fa-edit"></i>Details</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/Beheer" class="btn btn-primary">Terug</a>
+</div>

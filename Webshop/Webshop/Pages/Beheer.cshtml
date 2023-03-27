@@ -1,0 +1,110 @@
+﻿@page
+@model Webshop.Pages.BeheerModel
+@{
+    ViewData["Title"] = "Beheer Page";
+}
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
+<div class="container">
+    <div class="row justify-content-between align-items-center py-4">
+        <div class="col-md-6">
+            <h1 class="display-4">@ViewData["Title"]</h1>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="/insert" class="btn btn-primary btn-lg mr-3"><i class="fas fa-plus"></i> Toevoegen</a>
+            <a href="/UserManagement" class="btn btn-primary btn-lg mr-3"><i class="fas fa-users"></i> Gebruikersbeheer</a> <br />
+            <a href="/KlantenSysteem" class="btn btn-primary btn-lg mr-3"><i class="fas fa-address-book"></i> Klantenbeheer</a>
+            <a asp-page-handler="Logout" class="btn btn-danger btn-lg"><i class="fas fa-sign-out-alt"></i> Uitloggen</a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Prijs</th>
+                    <th scope="col">Afbeelding</th>
+                    <th scope="col">Beheer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (string[] shirt in Model.shirts)
+                {
+                    <tr>
+                        <td>@shirt[1]</td>
+                        <td>€@shirt[2]</td>
+                        <td><img src='Images\@shirt[3]' class="img-fluid"></td>
+                        <td>
+                            <a href="/Update?artikelnummer=@shirt[0]" class="btn btn-primary btn-sm mr-2"><i class="fas fa-edit"></i> Bewerken</a>
+                            <a href="/Delete?artikelnummer=@shirt[0]" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Verwijderen</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+ <style>
+.container {
+  margin-top: 50px;
+}
+
+     .btn-primary {
+         background-color: #F2F2F2;
+         color: #333333;
+         font-size: 20px;
+         font-weight: 500;
+         border: none;
+         border-radius: 20px;
+         padding: 10px 20px;
+         margin-right: 10px;
+     }
+
+     .btn-danger {
+         background-color: #F2F2F2;
+         color: #333333;
+         font-size: 20px;
+         font-weight: 500;
+         border: none;
+         border-radius: 20px;
+         padding: 10px 20px;
+     }
+
+         .btn-primary:hover,
+         .btn-danger:hover {
+             background-color: #E6E6E6;
+             color: #333333;
+             cursor: pointer;
+         }
+
+
+.table {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.table thead th {
+  font-weight: 500;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dcdcdc;
+}
+
+.table td img {
+  width: 150px;
+  height: auto;
+}
+
+
+
+
+ </style>
+

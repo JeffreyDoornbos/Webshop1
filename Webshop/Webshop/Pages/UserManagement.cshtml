@@ -1,0 +1,55 @@
+﻿@page
+@model Webshop.Pages.UserManagementModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<style>
+    #fas fa-edit {
+        width: 50px;
+        font-size: 30px;
+        color:red;
+    }
+    #fas fa-trash-alt {
+        width: 50px;
+        font-size: 30px;
+        color:red;
+    }
+</style>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Gebruikersnaam</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.Gebruikersnaam</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <button> <a asp-page="./EditUser" asp-route-id="@user.Id"><i class="fas fa-edit"></i></a> </button>
+                                <form asp-page-handler="DeleteUser" method="post" onsubmit="return confirm('Weet je zeker dat je deze user wilt verwijderen?')">
+                                    <input type="hidden" name="id" value="@user.Id" />
+                                    <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a asp-page="/AddUser" class="btn btn-primary">Voeg gebruiker toe</a>
+                <a href="/Beheer" class="btn btn-primary">Terug</a>
+            </div>
+        </div>
+    </div>
+</div>

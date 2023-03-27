@@ -1,0 +1,179 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (Request.Query["refresh"] == "true")
+{
+    <meta http-equiv="refresh" content="0">
+}
+
+<style>
+    .icon-hover:hover {
+        border-color: #3b71ca !important;
+        background-color: white !important;
+    }
+
+        .icon-hover:hover i {
+            color: #3b71ca !important;
+        }
+</style>
+
+<section class="my-4">
+    <div class="container">
+        <div class="row">
+            <!-- sidebar -->
+            <div class="col-lg-3">
+                <!-- Toggle button -->
+                <button class="btn btn-outline-secondary mb-3 w-100 d-lg-none"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span>Show filter</span>
+                </button>
+                <!-- Collapsible wrapper -->
+                <div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button text-dark bg-light"
+                                    data-mdb-target="#panelsStayOpen-collapseTwo"
+                                    aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapseTwo">
+                                Type
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+                            <div class="accordion-body">
+                                <div>
+                                    <form method="get">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="filterOption" value="" id="flexRadioDefault1" checked>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                All
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="filterOption" value="Macbook" id="flexRadioDefault2">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                Macbook
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="filterOption" value="Ipad" id="flexRadioDefault3">
+                                            <label class="form-check-label" for="flexRadioDefault3">
+                                                Ipad
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="filterOption" value="Iphone" id="flexRadioDefault4">
+                                            <label class="form-check-label" for="flexRadioDefault4">
+                                                Iphone
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="filterOption" value="Mac" id="flexRadioDefault5">
+                                            <label class="form-check-label" for="flexRadioDefault5">
+                                                Mac
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="filterOption" value="Airpods" id="flexRadioDefault6">
+                                            <label class="form-check-label" for="flexRadioDefault6">
+                                                Airpods
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Apply</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button text-dark bg-light"
+                                    type="button"
+                                    data-mdb-toggle="collapse"
+                                    data-mdb-target="#panelsStayOpen-collapseThree"
+                                    aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseThree">
+                                Price
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+                            <div class="accordion-body">
+                                <div class="range">
+                                    <input type="range" class="form-range" id="customRange1" />
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <p class="mb-0">Min</p>
+                                        <div class="form-outline">
+                                            <input type="number" id="minPrice" class="form-control" />
+                                            <label class="form-label" for="minPrice">$0</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-0">Max</p>
+                                        <div class="form-outline">
+                                            <input type="number" id="maxPrice" class="form-control" />
+                                            <label class="form-label" for="maxPrice">$100000</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-white w-100 border border-secondary" data-min-price="0" data-max-price="100000" onclick="filterByPrice()">Apply</button>
+                            </div>
+                        </div>
+                    </div>*@
+
+
+                </div>
+            </div>
+            <!-- sidebar -->
+            <!-- products -->
+            <div class="col-lg-9">
+                <div class="row justify-content-start">
+                    @foreach (string[] laptops in Model.laptopss)
+                    {
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card mb-4">
+                                <img class="card-img-top" src="Images/@laptops[3]" alt="@laptops[1]" style="object-fit: cover; height: 180px; ">
+                                <div class="card-body">
+                                    <h5 class="card-title">@laptops[1]</h5>
+                                    <p class="card-text">€@laptops[2]</p>
+
+                                    <form asp-page-handler="AddToCart" method="post">
+                                        <input type="hidden" name="id"  value="@laptops[0]" />
+                                        <button type="submit" class="btn btn-primary">Voeg toe</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+            <!-- products -->
+        </div>
+    </div>
+
+
+
+
+    <style>
+
+        .col-lg-3 {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        .col-lg-9 {
+            flex: 0 0 75%;
+            max-width: 75%;
+        }
+    </style>
+
+

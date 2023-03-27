@@ -1,0 +1,49 @@
+﻿@page
+@model Webshop.Pages.CartModel
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h2>Uw winkelwagen</h2>
+
+@if (Model.CartItems.Count == 0)
+{
+    <p>oei je karretje is een beetje leeg :(</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Prijs</th>
+                <th>Aantal</th>
+                <th>Subtototaal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>€@item.Price.ToString()</td>
+                    <td>@item.Quantity</td>
+                    <td>€@(item.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-right">
+        <h4>Totaal aantal producten: @Model.CartItems.Sum(x => x.Quantity).ToString()</h4>
+    </div>
+    <div class="text-right">
+        <h4>Totaal: €@Model.CartItems.Sum(x => x.Price * x.Quantity).ToString()</h4>
+    </div>
+
+    <form method="post" asp-page-handler="EmptyCart">
+        <button type="submit" class="btn btn-danger">Leeg winkelkarretje</button>
+        <input type="hidden" name="handler" value="EmptyCart" />
+    </form>
+
+    <a href="/Bestel"> <button class="btn btn-primary">Bestellen</button> </a>
+}
