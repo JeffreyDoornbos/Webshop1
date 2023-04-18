@@ -337,7 +337,7 @@ namespace Webshop.Pages
                     message.Attachments.Add(attachment);
 
                     var mailClient = new SmtpClient("smtp03.hostnet.nl", 587);
-                    mailClient.Credentials = new System.Net.NetworkCredential("jeffrey.doornbos@navigator-eu.com", "Zoetermeer1!");
+                    mailClient.Credentials = new System.Net.NetworkCredential("jeffrey.doornbos@navigator-eu.com", "");
                     mailClient.EnableSsl = false;
 
                     try
