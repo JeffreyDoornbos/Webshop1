@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
+
 
 namespace Webshop.Pages
 {
@@ -27,14 +24,18 @@ namespace Webshop.Pages
 
             this.BestelID = BestelID;
 
-            using (var connection = new SqliteConnection("Data Source=producten.db"))
-            {
-                connection.Open();
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-                // Read the customers from the database
-                var command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM VW_BestellingenDetails where bestelID = " + BestelID.ToString();
-                using (var reader = command.ExecuteReader())
+            string query = "SELECT * FROM VW_BestellingenDetails where bestelID = " + BestelID.ToString();
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
+
+
+                using (var reader = dbCommand.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -50,7 +51,6 @@ namespace Webshop.Pages
                         BestelDetails.Add(producten);
                     }
                 }
-            }
         }
     }
 

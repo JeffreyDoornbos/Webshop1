@@ -7,16 +7,17 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
 <div class="container">
     <div class="row justify-content-between align-items-center py-4">
-        <div class="col-md-6">
-            <h1 class="display-4">@ViewData["Title"]</h1>
-        </div>
-        <div class="col-md-6 text-right">
-            <a href="/insert" class="btn btn-primary btn-lg mr-3"><i class="fas fa-plus"></i> Toevoegen</a>
-            <a href="/UserManagement" class="btn btn-primary btn-lg mr-3"><i class="fas fa-users"></i> Gebruikersbeheer</a> <br />
-            <a href="/KlantenSysteem" class="btn btn-primary btn-lg mr-3"><i class="fas fa-address-book"></i> Klantenbeheer</a>
-            <a asp-page-handler="Logout" class="btn btn-danger btn-lg"><i class="fas fa-sign-out-alt"></i> Uitloggen</a>
+        <div class="col-md-12 text-right">
+            <a href="/insert" class="btn btn-link text-dark mr-3"><i class="fas fa-plus"></i></a>
+            <a href="/UserManagement" class="btn btn-link text-dark mr-3"><i class="fas fa-users"></i></a>
+            <a href="/Dashboard" onclick="window.open('/Dashboard', 'popup', 'fullscreen=yes'); return false;" class="btn btn-link text-dark mr-3"><i class="fa-solid fa-chart-line"></i></a>
+            <a href="/DashboardEdit" target="_blank" class="btn btn-link text-dark mr-3"><i class="fa-solid fa-file-pen"></i></a>
+            <a href="/KlantenSysteem" class="btn btn-link text-dark mr-3"><i class="fas fa-address-book"></i></a>
+            <a asp-page-handler="Logout" class="btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i></a>
         </div>
     </div>
+</div>
+
 
     <div class="table-responsive">
         <table class="table table-hover table-bordered mt-4">
@@ -29,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (string[] shirt in Model.shirts)
+                @foreach (string[] shirt in Model.product)
                 {
                     <tr>
                         <td>@shirt[1]</td>

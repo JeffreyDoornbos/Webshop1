@@ -1,26 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
+
 
 namespace Webshop.Pages
 {
     public class UserManagementModel : PageModel
     {
-
-        //public void OnPost()
-        //{
-        //    string? username = HttpContext.Session.GetString("Username");
-        //    if (username == null)
-        //    {
-        //        // Redirect to login page if the user is not logged in
-        //        Response.Redirect("/Inlog");
-        //    }
-        //}
 
         public class User
         {
@@ -30,7 +17,6 @@ namespace Webshop.Pages
             public string? Email { get; set; }
         }
 
-        private readonly string connectionString = "DataSource=users.db";
 
         public List<User> Users { get; set; }
 
@@ -44,14 +30,17 @@ namespace Webshop.Pages
                 // Redirect to login page if the user is not logged in
                 Response.Redirect("/Inlog");
             }
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-                var selectCommand = connection.CreateCommand();
-                selectCommand.CommandText = $"SELECT * FROM users";
+            string query = "SELECT * FROM users";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
 
-                var reader = selectCommand.ExecuteReader();
+                var reader = dbCommand.ExecuteReader();
 
                 Users = new List<User>();
 
@@ -67,23 +56,32 @@ namespace Webshop.Pages
 
                     Users.Add(user);
                 }
-            }
+            dbConnection.Close();
         }
+
 
         public async Task<IActionResult> OnPostDeleteUserAsync(int id)
         {
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-                var deleteCommand = connection.CreateCommand();
-                deleteCommand.CommandText = $"DELETE FROM users WHERE id = @id";
-                deleteCommand.Parameters.AddWithValue("@id", id);
+            string query = "DELETE FROM users WHERE id = @id";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
 
-                deleteCommand.ExecuteNonQuery();
+
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = "@id";
+            param.Value = id;
+            dbCommand.Parameters.Add(param);
+
+                dbCommand.ExecuteNonQuery();
 
                 return RedirectToPage("/UserManagement");
-            }
+            
         }
     }
 }

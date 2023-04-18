@@ -144,18 +144,19 @@
                                 <div class="card-body">
                                     <h5 class="card-title">@laptops[1]</h5>
                                     <p class="card-text">€@laptops[2]</p>
-
                                     <form asp-page-handler="AddToCart" method="post">
-                                        <input type="hidden" name="id"  value="@laptops[0]" />
-                                        <button type="submit" class="btn btn-primary">Voeg toe</button>
+                                        <input type="hidden" name="id" value="@laptops[0]" />
+                                        <button type="submit" class="btn btn-outline-primary">
+                                            <i class="fas fa-cart-plus"></i> Add to Cart
+                                        </button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-
                     }
                 </div>
             </div>
+
             <!-- products -->
         </div>
     </div>

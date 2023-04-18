@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
 
 namespace Webshop.Pages
 {
     public class InlogModel : PageModel
     {
-        private readonly string connectionString = "DataSource=users.db";
 
         [BindProperty]
         public string? Gebruikersnaam { get; set; }
@@ -30,16 +30,29 @@ namespace Webshop.Pages
                 return Page();
             }
 
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-                var selectCommand = connection.CreateCommand();
-                selectCommand.CommandText = $"SELECT * FROM users WHERE username = @username AND password = @password";
-                selectCommand.Parameters.AddWithValue("@username", Gebruikersnaam);
-                selectCommand.Parameters.AddWithValue("@password", Wachtwoord);
+            string query = "SELECT * FROM users WHERE username = @username AND password = @password";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
 
-                var reader = selectCommand.ExecuteReader();
+            SqlParameter paramA = new SqlParameter();
+            paramA.ParameterName = "@username";
+            paramA.Value = Gebruikersnaam;
+            dbCommand.Parameters.Add(paramA);
+
+            SqlParameter paramN = new SqlParameter();
+            paramN.ParameterName = "@password";
+            paramN.Value = Wachtwoord;
+            dbCommand.Parameters.Add(paramN);
+
+
+
+                var reader = dbCommand.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -51,7 +64,6 @@ namespace Webshop.Pages
                     ModelState.AddModelError(string.Empty, "Gebruikersnaam of wachtwoord is onjuist.");
                     return Page();
                 }
-            }
         }
     }
 }

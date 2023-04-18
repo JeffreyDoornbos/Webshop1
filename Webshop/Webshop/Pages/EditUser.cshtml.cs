@@ -1,34 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
 using static Webshop.Pages.UserManagementModel;
 
 namespace Webshop.Pages
 {
     public class EditUserModel : PageModel
     {
-        private readonly string connectionString = "DataSource=users.db";
-
         public User User { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            using (var connection = new SqliteConnection(connectionString))
+
+            string? username = HttpContext.Session.GetString("Username");
+            if (username == null)
             {
-                connection.Open();
+                // Redirect to login page if the user is not logged in
+                Response.Redirect("/Inlog");
+            }
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-                var selectCommand = connection.CreateCommand();
-                selectCommand.CommandText = $"SELECT * FROM users WHERE id = @id";
-                selectCommand.Parameters.AddWithValue("@id", id);
+            string query = "SELECT * FROM users WHERE id = @id";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
 
-                var reader = selectCommand.ExecuteReader();
+            SqlParameter paramA = new SqlParameter();
+            paramA.ParameterName = "@id";
+            paramA.Value = id;
+            dbCommand.Parameters.Add(paramA);
+
+
+                var reader = dbCommand.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -44,7 +51,7 @@ namespace Webshop.Pages
                 {
                     return NotFound();
                 }
-            }
+            dbConnection.Close();
 
             return Page();
         }
@@ -56,20 +63,36 @@ namespace Webshop.Pages
                 return Page();
             }
 
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-                var updateCommand = connection.CreateCommand();
-                updateCommand.CommandText = $"UPDATE users SET username = @username, email = @email WHERE id = @id";
-                updateCommand.Parameters.AddWithValue("@username", gebruikersnaam);
-                updateCommand.Parameters.AddWithValue("@email", email);
-                updateCommand.Parameters.AddWithValue("@id", id);
+            string query = "UPDATE users SET username = @username, email = @email WHERE id = @id";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
 
-                updateCommand.ExecuteNonQuery();
+            SqlParameter paramA = new SqlParameter();
+            paramA.ParameterName = "@username";
+            paramA.Value = gebruikersnaam;
+            dbCommand.Parameters.Add(paramA);
 
-                return RedirectToPage("/UserManagement");
-            }
+            SqlParameter paramP = new SqlParameter();
+            paramP.ParameterName = "@email";
+            paramP.Value = email;
+            dbCommand.Parameters.Add(paramP);
+
+            SqlParameter paramN = new SqlParameter();
+            paramN.ParameterName = "@id";
+            paramN.Value = id;
+            dbCommand.Parameters.Add(paramN);
+            dbCommand.ExecuteNonQuery();
+
+            dbConnection.Close();
+
+            return RedirectToPage("/UserManagement");
+           
         }
     }
 }

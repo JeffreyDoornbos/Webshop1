@@ -9,85 +9,93 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Webshop
 build_property.RootNamespace = Webshop
-build_property.ProjectDir = C:\Users\jeffr\Documents\GitHub\crudapp\Webshop\Webshop\
+build_property.ProjectDir = C:\Users\jeffr\Desktop\Webshop\Webshop\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\jeffr\Documents\GitHub\crudapp\Webshop\Webshop
+build_property.MSBuildProjectDirectory = C:\Users\jeffr\Desktop\Webshop\Webshop
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/AddUser.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/AddUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Beheer.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Beheer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmVoZWVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Bestel.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Bestel.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmVzdGVsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/BestelDetails.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/BestelDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmVzdGVsRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Cart.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Cart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Delete.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/DashboardEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/EditUser.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/EditUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Error.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Index.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Inlog.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Inlog.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5sb2cuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/insert.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/insert.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcaW5zZXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/KlantBetsellingen.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/KlantBetsellingen.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS2xhbnRCZXRzZWxsaW5nZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/KlantenSysteem.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/KlantenSysteem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS2xhbnRlblN5c3RlZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Update.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/UserManagement.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/UserManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlck1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/_ViewImports.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/_ViewStart.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jeffr/Documents/GitHub/crudapp/Webshop/Webshop/Pages/Shared/_Layout.cshtml]
+[C:/Users/jeffr/Desktop/Webshop/Webshop/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-qgd9uf0fti

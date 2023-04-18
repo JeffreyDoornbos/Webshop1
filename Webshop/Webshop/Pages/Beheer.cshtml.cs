@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
+
 
 namespace Webshop.Pages
 {
     public class BeheerModel : PageModel
     {
-        SqliteConnection connection;
-        public List<string[]> shirts = new List<string[]>();
-
-        public BeheerModel()
-        {
-            SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder();
-            connectionStringBuilder.DataSource = "producten.db";
-            connection = new SqliteConnection(connectionStringBuilder.ToString());
-        }
+        public List<string[]> product = new List<string[]>();
 
         public IActionResult OnGetLogout()
         {
@@ -36,24 +30,29 @@ namespace Webshop.Pages
                 // Redirect to login page if the user is not logged in
                 Response.Redirect("/Inlog");
             }
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-            connection.Open();
-            SqliteCommand command = connection.CreateCommand();
-            command.CommandText = $"SELECT * FROM producten";
+            string query = "SELECT * FROM producten";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
 
-            SqliteDataReader reader = command.ExecuteReader();
+            var reader = dbCommand.ExecuteReader();
 
             while (reader.Read())
             {
-                string[] shirt = new string[4];
-                shirt[0] = reader.GetInt32(0).ToString();
-                shirt[1] = reader.GetString(1);
-                shirt[2] = reader.GetDouble(2).ToString();
-                shirt[3] = reader.GetString(3);
+                string[] producten = new string[4];
+                producten[0] = reader.GetInt32(0).ToString();
+                producten[1] = reader.GetString(1);
+                producten[2] = reader.GetInt32(2).ToString();
+                producten[3] = reader.GetString(3);
 
-                shirts.Add(shirt);
+                product.Add(producten);
             }
-            connection.Close();
+            dbConnection.Close();
         }
     }
 }

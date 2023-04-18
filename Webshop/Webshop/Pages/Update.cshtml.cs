@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
+
+
 
 namespace Webshop.Pages
 {
@@ -17,31 +17,39 @@ namespace Webshop.Pages
 
         public void OnGet(string artikelnummer)
         {
+            string? username = HttpContext.Session.GetString("Username");
+            if (username == null)
+            {
+                // Redirect to login page if the user is not logged in
+                Response.Redirect("/Inlog");
+            }
             this.artikelnummer = artikelnummer;
 
-            string connectionString = "Data Source=producten.db";
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            string query = "SELECT * FROM producten WHERE ID = @artikelnummer";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
+
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = "@artikelnummer";
+            param.Value = artikelnummer;
+            dbCommand.Parameters.Add(param);
+            using (var reader = dbCommand.ExecuteReader())
             {
-                connection.Open();
-
-                string query = "SELECT * FROM producten WHERE ID = @artikelnummer";
-
-                using (SqliteCommand command = new SqliteCommand(query, connection))
+                while (reader.Read())
                 {
-                    command.Parameters.AddWithValue("@artikelnummer", artikelnummer);
-
-                    using (SqliteDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            this.naam = reader["naam"].ToString();
-                            this.prijs = reader["prijs"].ToString();
-                            this.afbeelding = reader["afbeelding"].ToString();
-                        }
-                    }
+                    this.naam = reader["naam"].ToString();
+                    this.prijs = reader["prijs"].ToString();
+                    this.afbeelding = reader["afbeelding"].ToString();
                 }
             }
+            dbConnection.Close();
+           
         }
 
         public IActionResult OnPost()
@@ -51,29 +59,40 @@ namespace Webshop.Pages
             naam = Request.Form["naam"];
             prijs = Request.Form["prijs"];
             afbeelding = Request.Form["afbeelding"];
-            string connectionString = "Data Source=producten.db";
 
 
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
+            string query = "UPDATE producten SET naam = @naam, prijs = @prijs, afbeelding = @afbeelding WHERE ID = @artikelnummer";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
 
-                string query = "UPDATE producten SET naam = @naam, prijs = @prijs, afbeelding = @afbeelding WHERE ID = @artikelnummer";
+            SqlParameter paramA = new SqlParameter();
+            paramA.ParameterName = "@artikelnummer";
+            paramA.Value = artikelnummer;
+            dbCommand.Parameters.Add(paramA);
 
-                using (SqliteCommand command = new SqliteCommand(query, connection))
-                {
+            SqlParameter paramN = new SqlParameter();
+            paramN.ParameterName = "@naam";
+            paramN.Value = naam;
+            dbCommand.Parameters.Add(paramN);
 
-                    command.Parameters.AddWithValue("@artikelnummer", artikelnummer);
-                    command.Parameters.AddWithValue("@naam", naam);
-                    command.Parameters.AddWithValue("@prijs", prijs);
-                    command.Parameters.AddWithValue("@afbeelding", afbeelding);
+            SqlParameter paramP = new SqlParameter();
+            paramP.ParameterName = "@prijs";
+            paramP.Value = prijs;
+            dbCommand.Parameters.Add(paramP);
 
-                    command.ExecuteNonQuery();
-                }
-            }
+            SqlParameter paramAfb = new SqlParameter();
+            paramAfb.ParameterName = "@afbeelding";
+            paramAfb.Value = afbeelding;
+            dbCommand.Parameters.Add(paramAfb);
 
+            dbCommand.ExecuteNonQuery();
+            dbConnection.Close();
             return RedirectToPage("/Beheer");
         }
     }
-
 }
+

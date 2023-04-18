@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data;
 
 namespace Webshop.Pages
 {
@@ -10,30 +10,39 @@ namespace Webshop.Pages
 
         public void OnGet()
         {
+
+            string? username = HttpContext.Session.GetString("Username");
+            if (username == null)
+            {
+                // Redirect to login page if the user is not logged in
+                Response.Redirect("/Inlog");
+            }
             Klanten = new List<Klant>();
 
             // Connect to the database
-            using (var connection = new SqliteConnection("Data Source=producten.db"))
-            {
-                connection.Open();
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
 
-                // Read the customers from the database
-                var command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM klanten";
-                using (var reader = command.ExecuteReader())
+            IDbConnection dbConnection = new SqlConnection(Conn);
+
+            string query = "SELECT * FROM klanten";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
+
+            using (var reader = dbCommand.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    var klant = new Klant
                     {
-                        var klant = new Klant
-                        {
-                            ID = reader.GetInt32(0),
-                            Naam = reader.GetString(1),
-                            Email = reader.GetString(2),
-                            Postcode = reader.GetString(3),
-                            Plaats = reader.GetString(4)
-                        };
-                        Klanten.Add(klant);
-                    }
+                        ID = reader.GetInt32(0),
+                        Naam = reader.GetString(1),
+                        Email = reader.GetString(2),
+                        Postcode = reader.GetString(3),
+                        Plaats = reader.GetString(4)
+                    };
+                    Klanten.Add(klant);
                 }
             }
         }

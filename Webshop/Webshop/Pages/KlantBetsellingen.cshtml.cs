@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
 
 namespace Webshop.Pages
 {
@@ -21,18 +22,30 @@ namespace Webshop.Pages
 
         public void OnGet(int KlantID)
         {
+
+            string? username = HttpContext.Session.GetString("Username");
+            if (username == null)
+            {
+                // Redirect to login page if the user is not logged in
+                Response.Redirect("/Inlog");
+            }
             KlantBestellingen = new List<KlantBestellingen>();
 
             this.KlantID = KlantID;
 
-            using (var connection = new SqliteConnection("Data Source=producten.db"))
-            {
-                connection.Open();
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-                // Read the customers from the database
-                var command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM Vw_Bestellingen where klantID = "+ KlantID.ToString();
-                using (var reader = command.ExecuteReader())
+            string query = "SELECT * FROM Vw_Bestellingen where klantID = " + KlantID.ToString();
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
+
+
+    
+                using (var reader = dbCommand.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -46,7 +59,7 @@ namespace Webshop.Pages
                         KlantBestellingen.Add(bestellingen);
                     }
                 }
-            }
+            dbConnection.Close();
         }
     }
 

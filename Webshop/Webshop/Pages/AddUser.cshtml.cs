@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
+
 
 namespace Webshop.Pages
 {
     public class AddUserModel : PageModel
     {
-        private readonly string connectionString = "DataSource=users.db";
+
 
 
         [BindProperty]
@@ -51,20 +48,36 @@ namespace Webshop.Pages
                 return Page();
             }
 
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
+            // Connect to the database
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
 
-                var insertCommand = connection.CreateCommand();
-                insertCommand.CommandText = $"INSERT INTO users (username, password, email) VALUES (@username, @password, @email)";
-                insertCommand.Parameters.AddWithValue("@username", Gebruikersnaam);
-                insertCommand.Parameters.AddWithValue("@password", Wachtwoord);
-                insertCommand.Parameters.AddWithValue("@email", Email);
+            string query = "INSERT INTO users (username, password, email) VALUES (@username, @password, @email)";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
 
-                insertCommand.ExecuteNonQuery();
+            SqlParameter paramA = new SqlParameter();
+            paramA.ParameterName = "@username";
+            paramA.Value = Gebruikersnaam;
+            dbCommand.Parameters.Add(paramA);
 
-                return RedirectToPage("/Beheer");
-            }
+            SqlParameter paramN = new SqlParameter();
+            paramN.ParameterName = "@password";
+            paramN.Value = Wachtwoord;
+            dbCommand.Parameters.Add(paramN);
+
+            SqlParameter paramP = new SqlParameter();
+            paramP.ParameterName = "@email";
+            paramP.Value = Email;
+            dbCommand.Parameters.Add(paramP);
+
+            dbCommand.ExecuteNonQuery();
+            dbConnection.Close();
+
+            return RedirectToPage("/Beheer");
+            
         }
     }
 }

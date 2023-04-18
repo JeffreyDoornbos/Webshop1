@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jeffr\\Documents\\GitHub\\crudapp\\Webshop\\Webshop\\Webshop.csproj": {}
+    "C:\\Users\\jeffr\\Desktop\\Webshop\\Webshop\\Webshop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jeffr\\Documents\\GitHub\\crudapp\\Webshop\\Webshop\\Webshop.csproj": {
+    "C:\\Users\\jeffr\\Desktop\\Webshop\\Webshop\\Webshop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jeffr\\Documents\\GitHub\\crudapp\\Webshop\\Webshop\\Webshop.csproj",
+        "projectUniqueName": "C:\\Users\\jeffr\\Desktop\\Webshop\\Webshop\\Webshop.csproj",
         "projectName": "Webshop",
-        "projectPath": "C:\\Users\\jeffr\\Documents\\GitHub\\crudapp\\Webshop\\Webshop\\Webshop.csproj",
+        "projectPath": "C:\\Users\\jeffr\\Desktop\\Webshop\\Webshop\\Webshop.csproj",
         "packagesPath": "C:\\Users\\jeffr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jeffr\\Documents\\GitHub\\crudapp\\Webshop\\Webshop\\obj\\",
+        "outputPath": "C:\\Users\\jeffr\\Desktop\\Webshop\\Webshop\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages"
+        ],
         "configFilePaths": [
           "C:\\Users\\jeffr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,6 +45,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "BuildBundlerMinifier": {
+              "target": "Package",
+              "version": "[3.2.449, )"
+            },
+            "DevExpress.AspNetCore.Dashboard": {
+              "target": "Package",
+              "version": "[22.2.4, )"
+            },
             "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
               "target": "Package",
               "version": "[7.0.4, )"
@@ -48,9 +61,9 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
-            "Microsoft.Data.Sqlite": {
+            "Microsoft.Data.SqlClient": {
               "target": "Package",
-              "version": "[7.0.4, )"
+              "version": "[5.1.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

@@ -40,10 +40,36 @@ else
         <h4>Totaal: €@Model.CartItems.Sum(x => x.Price * x.Quantity).ToString()</h4>
     </div>
 
+    <style>
+        .btn:hover {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-clear {
+            color: #007bff;
+            background-color: transparent;
+            border-color: #007bff;
+        }
+
+            .btn-clear:hover {
+                color: #fff;
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+    </style>
+
     <form method="post" asp-page-handler="EmptyCart">
-        <button type="submit" class="btn btn-danger">Leeg winkelkarretje</button>
+        <button type="submit" class="btn btn-clear">
+            <i class="fas fa-trash"></i> Leeg winkelkarretje
+        </button>
         <input type="hidden" name="handler" value="EmptyCart" />
     </form>
 
-    <a href="/Bestel"> <button class="btn btn-primary">Bestellen</button> </a>
+    <a href="/Bestel">
+        <button class="btn btn-clear">
+            <i class="fas fa-shopping-cart"></i> Bestellen
+        </button>
+    </a>
+
+
 }

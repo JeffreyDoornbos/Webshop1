@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.Sqlite;
+using Microsoft.Data.SqlClient;
 
 
 namespace Webshop.Pages
@@ -17,13 +12,19 @@ namespace Webshop.Pages
         [BindProperty, Required]
         public string Naam { get; set; }
         [BindProperty, Required]
-        public decimal Prijs { get; set; }
+        public int Prijs { get; set; }
 
         [BindProperty]
         public IFormFile Afbeelding { get; set; }
 
         public void OnGet()
         {
+            string? username = HttpContext.Session.GetString("Username");
+            if (username == null)
+            {
+                // Redirect to login page if the user is not logged in
+                Response.Redirect("/Inlog");
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -38,18 +39,33 @@ namespace Webshop.Pages
                 await Afbeelding.CopyToAsync(fileStream);
             }
 
-            using (var connection = new Microsoft.Data.Sqlite.SqliteConnection("Data Source=producten.db"))
-            {
-                await connection.OpenAsync();
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "INSERT INTO producten (naam, prijs, afbeelding) VALUES (@naam, @prijs, @afbeelding)";
-                    command.Parameters.AddWithValue("@naam", Naam);
-                    command.Parameters.AddWithValue("@prijs", Prijs);
-                    command.Parameters.AddWithValue("@afbeelding", Afbeelding.FileName);
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
+
+            string Conn = "Data Source=DESKTOP-CI1RHCI;Initial Catalog=AppleStore;Integrated Security=true;TrustServerCertificate=true; User Id=Jeffrey;Password=Jeffrey";
+            IDbConnection dbConnection = new SqlConnection(Conn);
+            string query = "INSERT INTO producten (naam, prijs, afbeelding) VALUES (@naam, @prijs, @afbeelding)";
+            IDbCommand dbCommand = new SqlCommand();
+            dbCommand.CommandText = query;
+            dbCommand.Connection = dbConnection;
+            dbConnection.Open();
+
+
+            SqlParameter paramN = new SqlParameter();
+            paramN.ParameterName = "@naam";
+            paramN.Value = Naam;
+            dbCommand.Parameters.Add(paramN);
+
+            SqlParameter paramP = new SqlParameter();
+            paramP.ParameterName = "@prijs";
+            paramP.Value = Prijs;
+            dbCommand.Parameters.Add(paramP);
+
+            SqlParameter paramAfb = new SqlParameter();
+            paramAfb.ParameterName = "@afbeelding";
+            paramAfb.Value = Afbeelding.FileName.ToString();
+            dbCommand.Parameters.Add(paramAfb);
+            dbCommand.ExecuteNonQuery();
+            dbConnection.Close();
+
             return RedirectToPage("Beheer");
         }
     }
