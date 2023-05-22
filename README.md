@@ -1,8 +1,8 @@
 # Webshop
 
 Webshop is een e-commerce applicatie gebouwd met behulp van C# Razor Pages en DevExpress voor het dashboard. Het stelt gebruikers in staat om producten te bekijken en te kopen, terwijl het dashboard handige functies biedt voor het beheren van de webshop, zoals het toevoegen en bijwerken van producten en het genereren van rapporten.
-
-![Webshop Screenshot](webshop-screenshot.png)
+<!-- 
+![Webshop Screenshot](webshop-screenshot.png) -->
 
 ## Functionaliteiten
 
