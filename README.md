@@ -40,7 +40,3 @@ tenzij je een Officiele DevExpress licentie hebt
 ## Licentie
 
 Deze applicatie valt onder de [MIT-licentie](LICENSE). Je mag de code vrij gebruiken, wijzigen en distribueren volgens de voorwaarden van de MIT-licentie.
-
----
-
-*Dit is een README.md-sjabloon die je kunt gebruiken als startpunt voor je eigen project. Pas het aan om aan je eigen behoeften te voldoen.*
